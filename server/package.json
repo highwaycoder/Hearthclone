@@ -9,6 +9,8 @@
   "author": "Chris Browne, James Ward",
   "license": "ISC",
   "dependencies": {
-    "lodash": "^2.4.1"
+    "express": "^4.9.5",
+    "lodash": "^2.4.1",
+    "socket.io": "^1.1.0"
   }
 }

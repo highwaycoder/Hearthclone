@@ -1,0 +1,19 @@
+{
+  "name": "Hearthclone",
+  "version": "0.0.0",
+  "description": "HTML5 Hearthstone clone",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Chris Browne, James Ward",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^2.4.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^3.0.1",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}
