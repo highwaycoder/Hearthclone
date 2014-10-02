@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/James/Projects/hearthclone/client/js/main.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 document.addEventListener("DOMContentLoaded", function() {
 
 	var _ = require("lodash");
@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	// var html = templates({ "world": "world" });
 	// console.log(typeof html);
-	// console.log(html);
+	// con
+	//sole.log(html);
 
 	var hearthstone = function (el) {
 		console.log('create login screen here');
@@ -35,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 }, false);
 
-},{"../templates/login.html":"/Users/James/Projects/hearthclone/client/templates/login.html","jquery":"/Users/James/Projects/hearthclone/client/node_modules/jquery/dist/jquery.js","lodash":"/Users/James/Projects/hearthclone/client/node_modules/lodash/dist/lodash.js"}],"/Users/James/Projects/hearthclone/client/node_modules/jquery/dist/jquery.js":[function(require,module,exports){
+},{"../templates/login.html":4,"jquery":2,"lodash":3}],2:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v2.1.1
  * http://jquery.com/
@@ -9227,7 +9228,7 @@ return jQuery;
 
 }));
 
-},{}],"/Users/James/Projects/hearthclone/client/node_modules/lodash/dist/lodash.js":[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -16016,7 +16017,7 @@ return jQuery;
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],"/Users/James/Projects/hearthclone/client/templates/login.html":[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 module.exports = function(obj){
 var __t,__p='',__j=Array.prototype.join,print=function(){__p+=__j.call(arguments,'');};
 with(obj||{}){
@@ -16025,4 +16026,4 @@ __p+='<div>Hello world!</div>';
 return __p;
 };
 
-},{}]},{},["/Users/James/Projects/hearthclone/client/js/main.js"]);
+},{}]},{},[1]);
