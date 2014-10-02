@@ -1,27 +1,22 @@
 var hearthclone = require('./hearthclone');
-var passport = require('passport');
 var bundle = require('socket.io-bundle');
-var ioPassport = require('socket.io-passport');
+var socketJwt = require('socketio-jwt');
 var config = require('./config');
 var _ = require('lodash');
 var clientServer = require('./clientServer');
-var io = require('socket.io')(clientServer);
+var io = require('socket.io')(require('http').createServer());
 
 function startServer(io) {
 	var playerPool = [];
-	io.listen(config.listenPort);
 
-	passport.deserializeUser(function (id, done) {
-		done(null, {id: id, name: 'Random Luser'});
-	});
-
-	io.use(bundle.cookieParser());
-	io.use(bundle.session({secret: 'foobar'}));
-	io.use(ioPassport.initialize());
-	io.use(ioPassport.session());
+	// TODO: Move all the user auth crap into a separate module
+	io.use(socketJwt.authorize({
+		secret: 'secret',
+		handshake: true
+	}));
 
 	io.on('connection', function (socket) {
-		console.log("A client connected. Finding a game... ", socket.request.user, socket.request.id);
+		console.log("A client connected. Finding a game for ", socket.decoded_token.name);
 
 		socket.on('first_start', function () {
 
@@ -35,6 +30,8 @@ function startServer(io) {
 			});
 		});
 	});
+
+	io.listen(config.listenPort);
 }
 
 startServer(io);
