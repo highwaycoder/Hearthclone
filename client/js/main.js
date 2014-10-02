@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	var socket = io("localhost:3000");
 
+	socket.emit('first_start');
+
 	hearthstone({
 		el: document.getElementById("hearthstone")
 	});
