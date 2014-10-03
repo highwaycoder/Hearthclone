@@ -43,4 +43,4 @@ Network Trash Folder
 Temporary Items
 .apdisk
 node_modules
-client/build/*
+client/build
