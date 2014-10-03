@@ -3,13 +3,20 @@ document.addEventListener("DOMContentLoaded", function() {
 	var _ = require("lodash");
 	var $ = require('jquery');
 
-	var template = require("../templates/login.hbs");
-
-	var html = template({ "world": "universe" });
-	console.log(html);
-
-	var hearthstone = function (el) {
-		console.log('create login screen here');
+	var hearthstone = function (initState) {
+		var loginTemplate = require('../templates/login.hbs'),
+				$formEl;
+		initState.$el.append(loginTemplate());
+		$formEl = $('form.login');
+		$formEl.on('submit', function (e) {
+			function mapize(prev, cur) {
+				prev[cur.name] = cur.value;
+				return prev; 
+			}
+			console.log($formEl.serializeArray().reduce(mapize, {}));
+			console.log('form submitted');
+			e.preventDefault();
+		});
 	};
 
 	function setupSocket(token) {
@@ -20,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
 		socket.emit('first_start');
 
 		hearthstone({
-			el: document.getElementById("hearthstone")
+			$el: $("#hearthstone")
 		});
 	}
 
