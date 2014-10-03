@@ -1,2 +1,2 @@
 #!/bin/bash
-watchify -t node-underscorify js/main.js -o build/hearthclone.js -v
+watchify -t node-handlebarsify js/main.js -o build/hearthclone.js -v

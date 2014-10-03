@@ -3,11 +3,10 @@ document.addEventListener("DOMContentLoaded", function() {
 	var _ = require("lodash");
 	var $ = require('jquery');
 
-	var template = require("../templates/login.html");
+	var template = require("../templates/login.hbs");
 
-	// var html = templates({ "world": "world" });
-	// console.log(typeof html);
-	// console.log(html);
+	var html = template({ "world": "universe" });
+	console.log(html);
 
 	var hearthstone = function (el) {
 		console.log('create login screen here');
