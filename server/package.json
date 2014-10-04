@@ -9,6 +9,7 @@
   "author": "Chris Browne, James Ward",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.9.0",
     "express": "^4.9.5",
     "jsonwebtoken": "^1.1.2",
     "lodash": "^2.4.1",

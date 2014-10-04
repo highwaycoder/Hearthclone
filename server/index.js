@@ -16,7 +16,7 @@ function startServer(io) {
 	}));
 
 	io.on('connection', function (socket) {
-		console.log("A client connected. Finding a game for ", socket.decoded_token.name);
+		console.log("A client connected. Finding a game for ", socket.decoded_token);
 
 		socket.on('first_start', function () {
 
@@ -32,6 +32,7 @@ function startServer(io) {
 	});
 
 	io.listen(config.listenPort);
+	console.log('socket.io server listening on port: ', config.listenPort);
 }
 
 startServer(io);

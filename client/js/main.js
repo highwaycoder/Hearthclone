@@ -1,8 +1,6 @@
-document.addEventListener("DOMContentLoaded", function() {
-
-	var _ = require("lodash");
-	var $ = require('jquery');
-
+var $ = require('jquery');
+var _ = require("lodash");
+$(function() {
 	var hearthstone = function (initState) {
 		var loginTemplate = require('../templates/login.hbs'),
 				$formEl;
@@ -11,9 +9,18 @@ document.addEventListener("DOMContentLoaded", function() {
 		$formEl.on('submit', function (e) {
 			function mapize(prev, cur) {
 				prev[cur.name] = cur.value;
-				return prev; 
+				return prev;
 			}
-			console.log($formEl.serializeArray().reduce(mapize, {}));
+			var formData = $formEl.serializeArray().reduce(mapize, {});
+			$.ajax({
+				method: 'POST',
+				url: '/login',
+				data: JSON.stringify(formData),
+				success: function (result) {
+					setupSocket(result.token);
+				},
+				contentType: 'application/json'
+			});
 			console.log('form submitted');
 			e.preventDefault();
 		});
@@ -25,17 +32,10 @@ document.addEventListener("DOMContentLoaded", function() {
 		});
 
 		socket.emit('first_start');
-
-		hearthstone({
-			$el: $("#hearthstone")
-		});
 	}
 
-	$.post('/login', {
-		username: 'foo',
-		password: 'bar'
-	}).done(function (result) {
-		setupSocket(result.token);
+	hearthstone({
+		$el: $("#hearthstone")
 	});
 
-}, false);
+});
