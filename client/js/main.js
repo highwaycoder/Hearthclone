@@ -1,36 +1,19 @@
 var $ = require('jquery');
 var _ = require("lodash");
 $(function() {
+	var login = require('./login');
 	var hearthstone = function (initState) {
-		var loginTemplate = require('../templates/login.hbs'),
-				$formEl;
-		initState.$el.append(loginTemplate());
-		$formEl = $('form.login');
-		$formEl.on('submit', function (e) {
-			function mapize(prev, cur) {
-				prev[cur.name] = cur.value;
-				return prev;
-			}
-			var formData = $formEl.serializeArray().reduce(mapize, {});
-			$.ajax({
-				method: 'POST',
-				url: '/login',
-				data: JSON.stringify(formData),
-				success: function (result) {
-					setupSocket(result.token);
-				},
-				contentType: 'application/json'
-			});
-			console.log('form submitted');
-			e.preventDefault();
-		});
+		login().then(setupSocket);
 	};
 
-	function setupSocket(token) {
+	function setupSocket(connectionInfo) {
 		var socket = io("localhost:3000", {
-			query: 'token=' + token
+			query: 'token=' + connectionInfo.token
 		});
 
+		socket.on('deck_list', function (deckList) {
+
+		});
 		socket.emit('first_start');
 	}
 

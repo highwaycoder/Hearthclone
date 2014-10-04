@@ -5,6 +5,7 @@ var config = require('./config');
 var _ = require('lodash');
 var clientServer = require('./clientServer');
 var io = require('socket.io')(require('http').createServer());
+var decks = require('./decks');
 
 function startServer(io) {
 	var playerPool = [];
@@ -19,7 +20,7 @@ function startServer(io) {
 		console.log("A client connected. Finding a game for ", socket.decoded_token);
 
 		socket.on('first_start', function () {
-
+			socket.emit('deck_list', decks);
 		});
 
 		socket.on('find_game', function (playerInfo) {
