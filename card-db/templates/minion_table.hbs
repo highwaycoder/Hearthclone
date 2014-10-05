@@ -10,7 +10,7 @@
     <th>Effects</th>
   </tr>
   {{#each entries}}
-    {{#if editing}}
+    {{#if isBeingEdited}}
       {{> minion_new}}
     {{else}}
       {{> minion_entry}}

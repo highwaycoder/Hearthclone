@@ -18,7 +18,11 @@ var minionCollectionView = function ($containerElement) {
         var minion = _.find(minionList.rows, function(minion) {
           return minion.id === minionId;
         });
-        console.log(minion);
+
+        minion.isBeingEdited = true;
+        minion.types = minionTypes.rows;
+        var html = newMinionTemplate(minion);
+        $(e.currentTarget).parents("tr").replaceWith(html);
         e.preventDefault();
       });
       $('.delete').on('click', function (e) {
