@@ -1,7 +1,7 @@
 var when = require('when');
 module.exports = function() {
   var promise = when.promise(function (resolve, reject) {
-    var loginTemplate = require('../templates/login.hbs'),
+    var loginTemplate = require('../../templates/login.hbs'),
         $formEl;
     initState.$el.append(loginTemplate());
     $formEl = $('form.login');

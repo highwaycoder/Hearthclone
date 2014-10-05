@@ -1,0 +1,30 @@
+<tr>
+  <td>
+    <input type="text" name="id" disabled placeholder="id"/>
+  </td>
+  <td>
+    <input type="text" name="name" placeholder="name"/>
+  </td>
+  <td>
+    <input type="number" name="cost" placeholder="cost"/>
+  </td>
+  <td>
+    <input type="number" name="health" placeholder="health"/>
+  </td>
+  <td>
+    <input type="number" name="attack" placeholder="attack"/>
+  </td>
+  <td>
+    <select name="type">
+      {{#each types}}
+        <option value="{{minion_type_id}}">{{minion_type}}</option>
+      {{/each}}
+    </select>
+  </td>
+  <td>
+    <input type="text" name="effects" placeholder="Not implemented" disabled />
+  </td>
+  <td>
+    <input type="submit" value="Add" />
+  </td>
+</tr>

@@ -1,0 +1,17 @@
+<form action="#" method="post" class='newMinion'>
+<table class='table'>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Cost</th>
+    <th>Health</th>
+    <th>Attack</th>
+    <th>Type</th>
+    <th>Effects</th>
+  </tr>
+  {{#each entries}}
+    {{> minion_entry}}
+  {{/each}}
+  {{> minion_new}}
+</table>
+</form>
