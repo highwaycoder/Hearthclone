@@ -1,6 +1,11 @@
-var $ = require('jquery');
-var _ = require("lodash");
-$(function() {
-	var minionCollectionView = require('./views/MinionCollectionView');
-	minionCollectionView($('#card-db'));
-});
+/**
+* @jsx React.DOM
+*/
+var React = require('react');
+
+var CardDBFE = require('./components/CardDBFE.react');
+
+React.renderComponent(
+  <CardDBFE />,
+  document.getElementById('card-db')
+);

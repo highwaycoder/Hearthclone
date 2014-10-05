@@ -1,23 +1,28 @@
 {
-  "name": "Hearthclone",
+  "name": "card-db",
   "version": "0.0.0",
-  "description": "HTML5 Hearthstone clone",
-  "main": "Gruntfile.js",
-  "scripts": {
-    "test": "test"
-  },
+  "description": "Hearthclone card database frontend",
+  "main": "js/main.js",
   "author": "Chris Browne, James Ward",
   "license": "ISC",
   "dependencies": {
-    "hbsfy": "^2.2.0",
+    "flux": "^2.0.1",
     "jquery": "^2.1.1",
     "lodash": "^2.4.1",
-    "when": "^3.5.0"
+    "react": "^0.11.2"
+  },
+  "scripts": {
+    "start": "watchify -o build/cards.js -v -d .",
+    "build": "NODE_ENV=production browserify . | uglifyjs -cm > js/bundle.min.js"
+  },
+  "browserify": {
+    "transform": [
+      "reactify",
+      "envify"
+    ]
   },
   "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-browserify": "^3.0.1",
-    "grunt-contrib-watch": "^0.6.1",
-    "browserify-handlebars": "0.2.0"
+    "envify": "^3.0.0",
+    "reactify": "^0.14.0"
   }
 }

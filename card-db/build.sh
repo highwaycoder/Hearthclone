@@ -1,3 +1,3 @@
 #!/bin/bash
-mkdir -p client/build
-watchify -t hbsfy js/main.js -o build/hearthclone.js -v --debug
+mkdir -p build
+watchify -o build/cards.js -v -d .
