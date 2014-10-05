@@ -1,6 +1,7 @@
 var when = require('when');
 var $ = require('jquery');
 var Handlebars = require('hbsfy/runtime');
+var _ = require('lodash');
 var minionCollectionView = function ($containerElement) {
   var minionTemplate = require('../../templates/minion_table.hbs'),
       newMinionTemplate = require('../../templates/minion_new.hbs'),
@@ -12,6 +13,14 @@ var minionCollectionView = function ($containerElement) {
       var minionList = apiResponse.minions,
           minionTypes = apiResponse.minionTypes;
       $containerElement.html(minionTemplate({entries: minionList.rows, types: minionTypes.rows}));
+      $('.edit').on('click', function (e) {
+        var minionId = $(e.currentTarget).data('id');
+        var minion = _.find(minionList.rows, function(minion) {
+          return minion.id === minionId;
+        });
+        console.log(minion);
+        e.preventDefault();
+      });
       $('.delete').on('click', function (e) {
         $.ajax({
           method: 'DELETE',
