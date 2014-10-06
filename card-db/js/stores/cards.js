@@ -21,9 +21,15 @@ var CardStore = merge(EventEmitter.prototype, {
     return cards;
   },
   getBlankCard: function () {
-      return _.map(cards[0], function (value, key) {
-        return;
-      });
+      var card =  _.reduce(cards[0], function (acc, val, key){
+        acc[val] = null;
+        return acc;
+      },{});
+
+      // TODO: explicitly set to "Normal" instead of hard-coding the id of Normal cards
+      card.type = "1";
+
+      return card;
   },
   getMinionTypes: function() {
     return minionTypes;
@@ -31,9 +37,9 @@ var CardStore = merge(EventEmitter.prototype, {
   update: function (card) {
     var self = this;
     $.ajax({
-      method: card.id ? 'post' : 'create',
+      method: card.id ? 'update' : 'post',
       url: '/card-db/api/minions/' + (card.id || ''),
-      data: card,
+      data: JSON.stringify(card),
       contentType: 'application/json',
       success: function (result) {
         if(card.id) {
