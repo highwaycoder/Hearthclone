@@ -40,21 +40,27 @@ pg.connect("postgres://hearthclone:hearthclone@localhost/hearthclone", function 
         return _.map(_.range(length), function (val) {
           return "$" + (val+1);
         });
-      }
-      console.log('values: ', _.values(req.body));
-      console.log('keys: ', _.keys(req.body));
-      console.log('query', 'INSERT INTO minions ('+_.keys(req.body).join(',')+') VALUES ('+_.values(req.body).join(',')+')');
+      };
+
+      var columns = _.keys(req.body).join(',');
+      var params = createParams(_.values(req.body).length);
+
       client.query({
-        text: 'INSERT INTO minions ('+_.keys(req.body).join(',')+') VALUES ('+createParams(_.values(req.body).length)+')',
+        text: 'INSERT INTO minions (' + columns + ') VALUES (' + params + ') RETURNING *',
         values: _.values(req.body)
-      }, function (err) {
+      }, function (err, result) {
         if(err) {
           console.log('query error:', err);
           res.send(500, err)
         } else {
-          res.send(200, true);
+          console.log(result.rows[0]);
+          res.send(200, result.rows[0]);
         }
       });
+    });
+
+    app.put('/card-db/api/minions/:minion_id', function (req,res) {
+      console.log("Update request", req.body);
     });
 
     app.delete('/card-db/api/minions/:minion_id', function (req,res) {

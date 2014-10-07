@@ -36,8 +36,9 @@ var CardStore = merge(EventEmitter.prototype, {
   },
   update: function (card) {
     var self = this;
+    card = _.omit(card, 'isEditing', 'minion_type_id', 'minion_type');
     $.ajax({
-      method: card.id ? 'update' : 'post',
+      method: card.id ? 'put' : 'post',
       url: '/card-db/api/minions/' + (card.id || ''),
       data: JSON.stringify(card),
       contentType: 'application/json',
@@ -50,6 +51,7 @@ var CardStore = merge(EventEmitter.prototype, {
         } else {
           cards.items.push(result);
         }
+        self.emit('change');
       }
     });
   },
