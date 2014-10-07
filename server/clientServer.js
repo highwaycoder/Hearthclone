@@ -36,8 +36,16 @@ pg.connect("postgres://hearthclone:hearthclone@localhost/hearthclone", function 
     });
 
     app.post('/card-db/api/minions', function (req, res) {
+      var createParams = function (length) {
+        return _.map(_.range(length), function (val) {
+          return "$" + (val+1);
+        });
+      }
+      console.log('values: ', _.values(req.body));
+      console.log('keys: ', _.keys(req.body));
+      console.log('query', 'INSERT INTO minions ('+_.keys(req.body).join(',')+') VALUES ('+_.values(req.body).join(',')+')');
       client.query({
-        text: 'INSERT INTO minions (name, cost, health, attack, type) VALUES($1, $2, $3, $4, $5)',
+        text: 'INSERT INTO minions ('+_.keys(req.body).join(',')+') VALUES ('+createParams(_.values(req.body).length)+')',
         values: _.values(req.body)
       }, function (err) {
         if(err) {
