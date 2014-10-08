@@ -28,7 +28,11 @@ var CardEditorComponent = React.createClass({
         minionTypes = this.props.minionTypes,
         minionTypeOptions = _.map(minionTypes, function (minionType, index) {
           return <option value={minionType.minion_type_id}>{minionType.minion_type}</option>
-        });
+        }),
+        shouldCancel = !!card.id,
+        maybeCancelButton = shouldCancel ?
+        <button className="cancel" data-id="{card.id}">Cancel</button> :
+        "";
     return (<tr>
       <td>
         <input type="number" disabled valueLink={this.linkState('id')} />
@@ -52,7 +56,8 @@ var CardEditorComponent = React.createClass({
       </td>
       <td>
         <button className="done" data-id="{card.id}" onClick={this.submitCard}>Done</button>
-        <button className="delete" data-id="{card.id}">X</button>
+        <button className="delete" data-id="{card.id}">Delete</button>
+        {maybeCancelButton}
       </td>
       </tr>);
   }

@@ -39,7 +39,7 @@ var CardStore = merge(EventEmitter.prototype, {
     card = _.omit(card, 'isEditing', 'minion_type_id', 'minion_type');
     $.ajax({
       method: card.id ? 'put' : 'post',
-      url: '/card-db/api/minions/' + (card.id || ''),
+      url: '/api/minions/' + (card.id || ''),
       data: JSON.stringify(card),
       contentType: 'application/json',
       success: function (result) {
@@ -57,7 +57,7 @@ var CardStore = merge(EventEmitter.prototype, {
   },
   fetch: function() {
     var self = this;
-    $.get('/card-db/api/minions', function(result) {
+    $.get('/api/minions', function(result) {
       cards.items = result.minions.rows;
       minionTypes = result.minionTypes.rows;
       self.emit('change');

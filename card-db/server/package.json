@@ -1,0 +1,17 @@
+{
+  "name": "carddb-be",
+  "version": "0.0.0",
+  "description": "Backend for card database frontend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Browne, James Ward",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.9.0",
+    "express": "^4.9.5",
+    "lodash": "^2.4.1",
+    "pg.js": "^3.5.0"
+  }
+}
