@@ -13,7 +13,11 @@ var CardViewerComponent = React.createClass({
   },
 
   editMode: function (e) {
-    CardActions.setEditing(this.props.card.id, true);
+    CardActions.setEditing(this.props.card.id);
+  },
+
+  deleteCard: function (e) {
+    CardActions.deleteCard(this.props.card.id);
   },
 
   render: function () {
@@ -27,7 +31,7 @@ var CardViewerComponent = React.createClass({
       <td>{card.minion_type}</td>
       <td>
         <button className="edit" data-id={card.id} onClick={this.editMode}>Edit</button>
-        <button className="delete" data-id={card.id}>Delete</button>
+        <button className="delete" data-id={card.id} onClick={this.deleteCard}>Delete</button>
       </td>
       </tr>);
   }

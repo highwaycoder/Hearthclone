@@ -16,6 +16,20 @@ var edit = function(id) {
   card.isEditing = true;
 };
 
+var deleteCard = function (id) {
+  $.ajax({
+    method: 'delete',
+    url: '/api/minions/' + id,
+    success: function () {
+      _.remove(cards.items, function (card) {
+        return card.id === id;
+      });
+      
+      CardStore.emit('change');
+    }
+  });
+}
+
 var CardStore = merge(EventEmitter.prototype, {
   getAll: function() {
     return cards;
@@ -70,11 +84,13 @@ AppDispatcher.register(function(action) {
     case CardConstants.EDIT:
       edit(action.id);
       break;
+    case CardConstants.DELETE:
+      deleteCard(action.id);
+      break;
     default: return true;
   }
 
   CardStore.emit('change');
-
 });
 
 module.exports = CardStore;

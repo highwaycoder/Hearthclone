@@ -1,3 +1,4 @@
 module.exports = {
-  EDIT: 'EDIT'
+  EDIT: 'EDIT',
+  DELETE: 'DELETE'
 };

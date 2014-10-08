@@ -13,6 +13,13 @@ var AppDispatcher = copyProperties(new Dispatcher(), {
       actionType: CardConstants.EDIT,
       id: id
     });
+  },
+
+  handleDeleteCardAction: function (id) {
+    this.dispatch({
+      actionType: CardConstants.DELETE,
+      id: id
+    });
   }
 
 });

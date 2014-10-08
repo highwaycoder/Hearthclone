@@ -11,6 +11,7 @@ pg.connect("postgres://hearthclone:hearthclone@localhost/hearthclone", function 
   } else {
 
     app.use(express.static(__dirname + '/../'));
+    app.use(bodyParser.json());
 
     app.get('/api/minions', function (req, res) {
       client.query('SELECT * FROM minions LEFT JOIN minion_types ON (minions.type = minion_types.minion_type_id)', function (err, minions) {
@@ -49,6 +50,9 @@ pg.connect("postgres://hearthclone:hearthclone@localhost/hearthclone", function 
       }, function (err, result) {
         if(err) {
           console.log('query error:', err);
+          console.log('columns:', columns);
+          console.log('params:', params);
+          console.log('values:', _.values(req.body));
           res.send(500, err)
         } else {
           console.log(result.rows[0]);

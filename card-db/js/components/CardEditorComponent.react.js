@@ -18,7 +18,6 @@ var CardEditorComponent = React.createClass({
   },
 
   submitCard: function (e) {
-    console.log(this.state);
     CardStore.update(this.state);
     e.preventDefault();
   },
@@ -31,7 +30,12 @@ var CardEditorComponent = React.createClass({
         }),
         shouldCancel = !!card.id,
         maybeCancelButton = shouldCancel ?
-        <button className="cancel" data-id="{card.id}">Cancel</button> :
+        // without the enclosing div, reactify complains about bad jsx :(
+        <div class='editExisting'>
+          <button className="delete" data-id="{card.id}" onClick={this.deleteCard}>Delete</button>
+          <button className="cancel" data-id="{card.id}">Cancel</button>
+        </div>
+        :
         "";
     return (<tr>
       <td>
@@ -56,7 +60,6 @@ var CardEditorComponent = React.createClass({
       </td>
       <td>
         <button className="done" data-id="{card.id}" onClick={this.submitCard}>Done</button>
-        <button className="delete" data-id="{card.id}">Delete</button>
         {maybeCancelButton}
       </td>
       </tr>);
