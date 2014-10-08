@@ -6,6 +6,9 @@ var CardActions = {
   },
   deleteCard: function (id) {
     AppDispatcher.handleDeleteCardAction(id);
+  },
+  cancelEditing: function (id) {
+    AppDispatcher.handleCancelEditingCardAction(id);
   }
 };
 

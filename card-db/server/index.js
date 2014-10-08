@@ -62,17 +62,29 @@ pg.connect("postgres://hearthclone:hearthclone@localhost/hearthclone", function 
     });
 
     app.put('/api/minions/:minion_id', function (req,res) {
-      console.log("Update request", req.body);
+      var field_definitions = _.map(req.body, function (val, key) {
+        if (typeof val === "string") {
+          val = "'" + val + "'";
+        }
+        return key + " = " + val;
+      }).join(',');
+      console.log("Update request", field_definitions);
       client.query({
-        text: 'UPDATE minions SET ' + field_definitions + ' WHERE id=$1 RETURNING *',
-        values: req.body.id
+        text: 'UPDATE minions SET ' + field_definitions + ' WHERE id=$1',
+        values: [req.body.id]
       }, function (err, result) {
         if(err) {
           console.log(err);
           res.status(500).send(err);
         } else {
-          console.log(result);
-          res.status(200).send(result);
+          client.query('SELECT * FROM minions LEFT JOIN minion_types ON (minions.type = minion_types.minion_type_id)', function (err, minion) {
+            if(err) {
+              console.log('query error', err);
+              res.send(500, err);
+            } else {
+              res.status(200).send(minion);
+            }
+          });
         }
       });
     });

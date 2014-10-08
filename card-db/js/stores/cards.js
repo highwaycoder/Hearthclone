@@ -24,11 +24,19 @@ var deleteCard = function (id) {
       _.remove(cards.items, function (card) {
         return card.id === id;
       });
-      
+
       CardStore.emit('change');
     }
   });
-}
+};
+
+var cancelEdit = function (id) {
+  var card = _.find(cards.items, function(card) {
+    return card.id === id;
+  });
+
+  card.isEditing = false;
+};
 
 var CardStore = merge(EventEmitter.prototype, {
   getAll: function() {
@@ -57,13 +65,15 @@ var CardStore = merge(EventEmitter.prototype, {
       data: JSON.stringify(card),
       contentType: 'application/json',
       success: function (result) {
+        console.log(result);
+        var newCard = result.rows[0];
         if(card.id) {
-          var appropriateCardIndex = _.findIndex(cards, function (card) {
-            return (result.id === card.id);
+          var appropriateCardIndex = _.findIndex(cards.items, function (card) {
+            return (newCard.id === card.id);
           });
-          cards[appropriateCardIndex] = result;
+          cards.items[appropriateCardIndex] = newCard;
         } else {
-          cards.items.push(result);
+          cards.items.push(newCard);
         }
         self.emit('change');
       }
@@ -86,6 +96,9 @@ AppDispatcher.register(function(action) {
       break;
     case CardConstants.DELETE:
       deleteCard(action.id);
+      break;
+    case CardConstants.CANCEL_EDIT:
+      cancelEdit(action.id);
       break;
     default: return true;
   }

@@ -5,6 +5,7 @@ var React = require('react/addons');
 var _ = require('lodash');
 
 var CardStore = require('../stores/cards');
+var CardActions = require('../actions/CardActions');
 
 var CardEditorComponent = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
@@ -17,9 +18,17 @@ var CardEditorComponent = React.createClass({
     return _.clone(this.props.card);
   },
 
+  cancelEditing: function () {
+    CardActions.cancelEditing(this.props.card.id);
+  },
+
   submitCard: function (e) {
     CardStore.update(this.state);
     e.preventDefault();
+  },
+
+  deleteCard: function (e) {
+    CardActions.deleteCard(this.props.card.id);
   },
 
   render: function () {
@@ -33,7 +42,7 @@ var CardEditorComponent = React.createClass({
         // without the enclosing div, reactify complains about bad jsx :(
         <div class='editExisting'>
           <button className="delete" data-id="{card.id}" onClick={this.deleteCard}>Delete</button>
-          <button className="cancel" data-id="{card.id}">Cancel</button>
+          <button className="cancel" data-id="{card.id}" onClick={this.cancelEditing}>Cancel</button>
         </div>
         :
         "";
