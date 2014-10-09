@@ -5,15 +5,14 @@ var React = require('react');
 
 var MinionStore = require('../stores/MinionStore');
 
-var CardsTable = require('./MinionTable.react');
+var MinionTable = require('./MinionTable.react');
 
 MinionStore.fetch();
 
 var CardDBFE = React.createClass({
-
   getInitialState: function() {
     return {
-      cards: MinionStore.getAll(),
+      minions: MinionStore.getAll(),
       minionTypes: MinionStore.getMinionTypes()
     };
   },
@@ -27,14 +26,12 @@ var CardDBFE = React.createClass({
   },
 
   render: function () {
-    return (
-      <CardsTable cards={this.state.cards} minionTypes={this.state.minionTypes}></CardsTable>
-    );
+    return <MinionTable cards={this.state.minions} minionTypes={this.state.minionTypes}></MinionTable>
   },
 
   onChange: function () {
     this.setState({
-      cards: MinionStore.getAll(),
+      minions: MinionStore.getAll(),
       minionTypes: MinionStore.getMinionTypes()
     });
   }

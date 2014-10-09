@@ -9,7 +9,8 @@
     "flux": "^2.0.1",
     "jquery": "^2.1.1",
     "lodash": "^2.4.1",
-    "react": "^0.11.2"
+    "react": "^0.11.2",
+    "react-router": "^0.9.3"
   },
   "scripts": {
     "start": "watchify -o build/cards.js -v -d .",
