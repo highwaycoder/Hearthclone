@@ -3,27 +3,27 @@
 */
 var React = require('react');
 
-var CardStore = require('../stores/cards');
+var MinionStore = require('../stores/MinionStore');
 
-var CardsTable = require('./CardsTable.react');
+var CardsTable = require('./MinionTable.react');
 
-CardStore.fetch();
+MinionStore.fetch();
 
 var CardDBFE = React.createClass({
 
   getInitialState: function() {
     return {
-      cards: CardStore.getAll(),
-      minionTypes: CardStore.getMinionTypes()
+      cards: MinionStore.getAll(),
+      minionTypes: MinionStore.getMinionTypes()
     };
   },
 
   componentDidMount: function() {
-    CardStore.addListener('change', this.onChange);
+    MinionStore.addListener('change', this.onChange);
   },
 
   componentWillUnmount: function() {
-    CardStore.removeListener('change', this.onChange);
+    MinionStore.removeListener('change', this.onChange);
   },
 
   render: function () {
@@ -34,8 +34,8 @@ var CardDBFE = React.createClass({
 
   onChange: function () {
     this.setState({
-      cards: CardStore.getAll(),
-      minionTypes: CardStore.getMinionTypes()
+      cards: MinionStore.getAll(),
+      minionTypes: MinionStore.getMinionTypes()
     });
   }
 });

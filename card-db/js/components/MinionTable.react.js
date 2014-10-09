@@ -4,11 +4,11 @@
 var React = require('react');
 var _ = require('lodash');
 
-var CardEditorComponent = require('./CardEditorComponent.react');
-var CardViewerComponent = require('./CardViewerComponent.react');
-var CardStore = require('../stores/cards');
+var MinionEditorComponent = require('./MinionEditorComponent.react');
+var MinionViewerComponent = require('./MinionViewerComponent.react');
+var MinionStore = require('../stores/MinionStore');
 
-var CardsTable = React.createClass({
+var MinionTable = React.createClass({
 
   propTypes: {
     cards: React.PropTypes.object.isRequired,
@@ -21,14 +21,14 @@ var CardsTable = React.createClass({
 
     var cards = _.map(this.props.cards.items, function(card) {
       if(card.isEditing) {
-        return <CardEditorComponent card={card} minionTypes={minionTypes}/>
+        return <MinionEditorComponent card={card} minionTypes={minionTypes}/>
       } else {
-        return <CardViewerComponent card={card} minionTypes={minionTypes}/>
+        return <MinionViewerComponent card={card} minionTypes={minionTypes}/>
       }
     });
-    var blankCard = CardStore.getBlankCard();
+    var blankCard = MinionStore.getBlankCard();
 
-    cards.push(<CardEditorComponent card={blankCard} minionTypes={minionTypes}/>);
+    cards.push(<MinionEditorComponent card={blankCard} minionTypes={minionTypes}/>);
 
     return (
       <table className="table">
@@ -60,4 +60,4 @@ var CardsTable = React.createClass({
   },
 });
 
-module.exports = CardsTable;
+module.exports = MinionTable;

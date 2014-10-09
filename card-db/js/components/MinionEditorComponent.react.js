@@ -4,8 +4,8 @@
 var React = require('react/addons');
 var _ = require('lodash');
 
-var CardStore = require('../stores/cards');
-var CardActions = require('../actions/CardActions');
+var MinionStore = require('../stores/MinionStore');
+var MinionActions = require('../actions/MinionActions');
 
 var CardEditorComponent = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
@@ -19,16 +19,16 @@ var CardEditorComponent = React.createClass({
   },
 
   cancelEditing: function () {
-    CardActions.cancelEditing(this.props.card.id);
+    MinionActions.cancelEditing(this.props.card.id);
   },
 
   submitCard: function (e) {
-    CardStore.update(this.state);
+    MinionStore.update(this.state);
     e.preventDefault();
   },
 
   deleteCard: function (e) {
-    CardActions.deleteCard(this.props.card.id);
+    MinionActions.deleteCard(this.props.card.id);
   },
 
   render: function () {

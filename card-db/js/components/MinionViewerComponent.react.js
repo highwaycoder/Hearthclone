@@ -2,8 +2,8 @@
 * @jsx React.DOM
 */
 var React = require('react');
-var CardActions = require('../actions/CardActions');
-var CardStore = require('../stores/cards');
+var MinionActions = require('../actions/MinionActions');
+var MinionStore = require('../stores/MinionStore');
 var $ = require('jquery');
 
 var CardViewerComponent = React.createClass({
@@ -13,11 +13,11 @@ var CardViewerComponent = React.createClass({
   },
 
   editMode: function (e) {
-    CardActions.setEditing(this.props.card.id);
+    MinionActions.setEditing(this.props.card.id);
   },
 
   deleteCard: function (e) {
-    CardActions.deleteCard(this.props.card.id);
+    MinionActions.deleteCard(this.props.card.id);
   },
 
   render: function () {

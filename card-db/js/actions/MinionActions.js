@@ -1,6 +1,6 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 
-var CardActions = {
+var MinionActions = {
   setEditing: function(id) {
     AppDispatcher.handleEditCardAction(id);
   },
@@ -12,4 +12,4 @@ var CardActions = {
   }
 };
 
-module.exports = CardActions;
+module.exports = MinionActions;
