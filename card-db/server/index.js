@@ -103,6 +103,12 @@ pg.connect("postgres://hearthclone:hearthclone@localhost/hearthclone", function 
       });
     });
 
+    app.get('*', function (req, res) {
+      var path = require('path'),
+          indexPath = path.resolve(__dirname + '/../');
+      res.status(200).sendFile(indexPath + '/index.html');
+    });
+
     app.listen(config.listenPort);
     console.log('card db backend listening on port', config.listenPort);
   }
