@@ -30,8 +30,8 @@ var CardViewerComponent = React.createClass({
       <td>{card.cost}</td>
       <td>{card.minion_type}</td>
       <td>
-        <button className="edit" data-id={card.id} onClick={this.editMode}>Edit</button>
-        <button className="delete" data-id={card.id} onClick={this.deleteCard}>Delete</button>
+        <button className="edit" data-id={card.id} onClick={this.editMode} className="form-control">Edit</button>
+        <button className="delete" data-id={card.id} onClick={this.deleteCard} className="form-control">Delete</button>
       </td>
       </tr>);
   }

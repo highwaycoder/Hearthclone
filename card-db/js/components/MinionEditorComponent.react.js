@@ -41,34 +41,34 @@ var CardEditorComponent = React.createClass({
         maybeCancelButton = shouldCancel ?
         // without the enclosing div, reactify complains about bad jsx :(
         <div class='editExisting'>
-          <button className="delete" data-id="{card.id}" onClick={this.deleteCard}>Delete</button>
-          <button className="cancel" data-id="{card.id}" onClick={this.cancelEditing}>Cancel</button>
+          <button className="delete" data-id="{card.id}" onClick={this.deleteCard} className="form-control">Delete</button>
+          <button className="cancel" data-id="{card.id}" onClick={this.cancelEditing} className="form-control">Cancel</button>
         </div>
         :
         "";
     return (<tr>
       <td>
-        <input type="number" disabled valueLink={this.linkState('id')} />
+        <input type="number" disabled valueLink={this.linkState('id')} className="form-control" />
       </td>
       <td>
-        <input type="text" valueLink={this.linkState('name')} />
+        <input type="text" valueLink={this.linkState('name')} className="form-control" />
       </td>
       <td>
-        <input type="number" valueLink={this.linkState('health')} />
+        <input type="number" valueLink={this.linkState('health')} className="form-control" />
       </td>
       <td>
-        <input type="number" valueLink={this.linkState('attack')} />
+        <input type="number" valueLink={this.linkState('attack')} className="form-control" />
       </td>
       <td>
-        <input type="number" valueLink={this.linkState('cost')} />
+        <input type="number" valueLink={this.linkState('cost')} className="form-control" />
       </td>
       <td>
-        <select valueLink={this.linkState('type')}>
+        <select valueLink={this.linkState('type')} className="form-control">
           {minionTypeOptions}
         </select>
       </td>
       <td>
-        <button className="done" data-id="{card.id}" onClick={this.submitCard}>Done</button>
+        <button className="done" data-id="{card.id}" onClick={this.submitCard} className="form-control">Done</button>
         {maybeCancelButton}
       </td>
       </tr>);

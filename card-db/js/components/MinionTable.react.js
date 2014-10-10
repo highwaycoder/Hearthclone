@@ -31,31 +31,35 @@ var MinionTable = React.createClass({
     cards.push(<MinionEditorComponent card={blankCard} minionTypes={minionTypes}/>);
 
     return (
-      <table className="table">
-        <tbody>
-          <tr>
-            <th>
-              ID
-            </th>
-            <th>
-              Name
-            </th>
-            <th>
-              Health
-            </th>
-            <th>
-              Attack
-            </th>
-            <th>
-              Cost
-            </th>
-            <th>
-              Type
-            </th>
-          </tr>
-          {cards}
-        </tbody>
-      </table>
+      <div className="container-fluid">
+        <div className="row">
+          <table className="table">
+            <tbody>
+              <tr>
+                <th>
+                  ID
+                </th>
+                <th>
+                  Name
+                </th>
+                <th>
+                  Health
+                </th>
+                <th>
+                  Attack
+                </th>
+                <th>
+                  Cost
+                </th>
+                <th>
+                  Type
+                </th>
+              </tr>
+              {cards}
+            </tbody>
+          </table>
+        </div>
+      </div>
     );
   },
 });
