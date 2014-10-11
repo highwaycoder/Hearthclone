@@ -6,7 +6,7 @@ var $ = require('jquery');
 var _ = require('lodash');
 
 var cards = {};
-var minionTypes = {};
+var minionTypes = [];
 
 var edit = function(id) {
   var card = _.find(cards.items, function(card) {
@@ -24,8 +24,7 @@ var deleteCard = function (id) {
       _.remove(cards.items, function (card) {
         return card.id === id;
       });
-
-      CardStore.emit('change');
+      MinionStore.emit('change');
     }
   });
 };
@@ -38,7 +37,7 @@ var cancelEdit = function (id) {
   card.isEditing = false;
 };
 
-var CardStore = merge(EventEmitter.prototype, {
+var MinionStore = merge(EventEmitter.prototype, {
   getAll: function() {
     return cards;
   },
@@ -65,8 +64,8 @@ var CardStore = merge(EventEmitter.prototype, {
       data: JSON.stringify(card),
       contentType: 'application/json',
       success: function (result) {
-        console.log(result);
         var newCard = result.rows[0];
+        newCard.isEditing = false;
         if(card.id) {
           var appropriateCardIndex = _.findIndex(cards.items, function (card) {
             return (newCard.id === card.id);
@@ -103,7 +102,7 @@ AppDispatcher.register(function(action) {
     default: return true;
   }
 
-  CardStore.emit('change');
+  MinionStore.emit('change');
 });
 
-module.exports = CardStore;
+module.exports = MinionStore;

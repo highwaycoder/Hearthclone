@@ -7,7 +7,7 @@ var _ = require('lodash');
 var MinionStore = require('../stores/MinionStore');
 var MinionActions = require('../actions/MinionActions');
 
-var CardEditorComponent = React.createClass({
+var MinionEditorComponent = React.createClass({
   mixins: [React.addons.LinkedStateMixin],
   propTypes: {
     card: React.PropTypes.object.isRequired,
@@ -35,12 +35,12 @@ var CardEditorComponent = React.createClass({
     var card = this.props.card,
         minionTypes = this.props.minionTypes,
         minionTypeOptions = _.map(minionTypes, function (minionType, index) {
-          return <option value={minionType.minion_type_id}>{minionType.minion_type}</option>
+          return <option value={minionType.minion_type_id} key={minionType.minion_type_id}>{minionType.minion_type}</option>
         }),
         shouldCancel = !!card.id,
         maybeCancelButton = shouldCancel ?
         // without the enclosing div, reactify complains about bad jsx :(
-        <div class='editExisting'>
+        <div className='editExisting'>
           <button className="delete" data-id="{card.id}" onClick={this.deleteCard} className="form-control">Delete</button>
           <button className="cancel" data-id="{card.id}" onClick={this.cancelEditing} className="form-control">Cancel</button>
         </div>
@@ -75,4 +75,4 @@ var CardEditorComponent = React.createClass({
   }
 });
 
-module.exports = CardEditorComponent;
+module.exports = MinionEditorComponent;

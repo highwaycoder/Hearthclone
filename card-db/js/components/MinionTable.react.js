@@ -21,14 +21,14 @@ var MinionTable = React.createClass({
 
     var cards = _.map(this.props.cards.items, function(card) {
       if(card.isEditing) {
-        return <MinionEditorComponent card={card} minionTypes={minionTypes}/>
+        return <MinionEditorComponent card={card} minionTypes={minionTypes} key={card.id}/>
       } else {
-        return <MinionViewerComponent card={card} minionTypes={minionTypes}/>
+        return <MinionViewerComponent card={card} minionTypes={minionTypes} key={card.id}/>
       }
     });
     var blankCard = MinionStore.getBlankCard();
 
-    cards.push(<MinionEditorComponent card={blankCard} minionTypes={minionTypes}/>);
+    cards.push(<MinionEditorComponent card={blankCard} minionTypes={minionTypes} key="0" />);
 
     return (
       <div className="container-fluid">

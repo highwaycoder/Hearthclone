@@ -77,7 +77,10 @@ pg.connect("postgres://hearthclone:hearthclone@localhost/hearthclone", function 
           console.log(err);
           res.status(500).send(err);
         } else {
-          client.query('SELECT * FROM minions LEFT JOIN minion_types ON (minions.type = minion_types.minion_type_id)', function (err, minion) {
+          client.query({
+            text: 'SELECT * FROM minions LEFT JOIN minion_types ON (minions.type = minion_types.minion_type_id) WHERE id=$1',
+            values: [req.body.id]
+          }, function (err, minion) {
             if(err) {
               console.log('query error', err);
               res.send(500, err);
