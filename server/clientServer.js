@@ -5,9 +5,13 @@ var config = require('./config');
 var jwt = require('jsonwebtoken');
 var pg = require('pg.js');
 var _ = require('lodash');
+var cardApiMiddleware = require('./carddb-middleware/');
 
 app.use('/', express.static(__dirname + '/../client'));
 app.use(bodyParser.json());
+
+// card API
+app.use('/card-api/', cardApiMiddleware);
 
 app.post('/login', function (req, res) {
   // TODO: mongoose integration
@@ -21,6 +25,7 @@ app.post('/login', function (req, res) {
   var token = jwt.sign(profile, 'secret', {expiresInMinutes: 60*5});
   res.json({token:token});
 });
+
 
 app.listen(config.staticPort);
 console.log('http server listening on port: ', config.staticPort);
