@@ -30,3 +30,5 @@ React.renderComponent(
   routes,
   document.getElementById('card-db')
 );
+
+window.React = React;
