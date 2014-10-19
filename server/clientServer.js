@@ -6,6 +6,7 @@ var jwt = require('jsonwebtoken');
 var pg = require('pg.js');
 var _ = require('lodash');
 var cardApiMiddleware = require('./carddb-middleware/');
+var constants = require('./constants');
 
 app.use('/', express.static(__dirname + '/../client'));
 app.use(bodyParser.json());
@@ -18,11 +19,11 @@ app.post('/login', function (req, res) {
   console.log(req.body);
   var profile = {
     name: 'foouser',
-    id: req.body['id']
+    id: req.body.id
   };
 
 
-  var token = jwt.sign(profile, 'secret', {expiresInMinutes: 60*5});
+  var token = jwt.sign(profile, constants.jwt_secret, {expiresInMinutes: 60*5});
   res.json({token:token});
 });
 

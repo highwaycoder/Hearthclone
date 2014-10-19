@@ -3,7 +3,7 @@ var _ = require("lodash");
 $(function() {
 	var login = require('./login');
 	var hearthstone = function (initState) {
-		login().then(setupSocket);
+		login(initState).then(setupSocket);
 	};
 
 	function setupSocket(connectionInfo) {
@@ -12,7 +12,7 @@ $(function() {
 		});
 
 		socket.on('deck_list', function (deckList) {
-
+			console.log(deckList);
 		});
 		socket.emit('first_start');
 	}

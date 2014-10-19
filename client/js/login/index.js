@@ -1,5 +1,6 @@
 var when = require('when');
-module.exports = function() {
+var $ = require('jquery');
+module.exports = function(initState) {
   var promise = when.promise(function (resolve, reject) {
     var loginTemplate = require('../../templates/login.hbs'),
         $formEl;
@@ -23,5 +24,6 @@ module.exports = function() {
       console.log('form submitted');
       e.preventDefault();
     });
-  })
+  });
+  return promise;
 }
