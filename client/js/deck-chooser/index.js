@@ -1,12 +1,15 @@
-var _ = require('lodash');
+var Handlebars = require('hbsfy/runtime'),
+    deckTemplate = require('./templates/deck.hbs'),
+    chooserTemplate = require('./templates/chooser.hbs'),
+    heroFriendlyNameHelper = require('./helpers/heroFriendlyName'),
+    _ = require('lodash');
 
 module.exports = function (initState) {
+  Handlebars.registerPartial('deck', deckTemplate);
+  Handlebars.registerHelper('getFriendlyNameForHero', heroFriendlyNameHelper);
   return function (deckList) {
-    // TODO: make template, then do this properly
-    initState.$el.empty();
-    initState.$el.append("<ul>");
-    initState.$el.append(_.map(deckList, function (deck) {
-      return "<li>" + deck.hero + "</li>";
-    }).join(''));
+    initState.$el.html(chooserTemplate({
+      decks: deckList
+    }));
   }
 }

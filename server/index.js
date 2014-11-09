@@ -18,7 +18,7 @@ function startServer(io) {
 	}));
 
 	io.on('connection', function (socket) {
-		console.log("A client connected. Finding a game for ", socket.decoded_token);
+		console.log("Client connected: ", socket.decoded_token);
 
 		socket.on('first_start', function () {
 			var userDecks = _.filter(decks, function (deck) {

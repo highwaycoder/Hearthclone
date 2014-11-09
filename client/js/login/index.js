@@ -2,7 +2,7 @@ var when = require('when');
 var $ = require('jquery');
 module.exports = function(initState) {
   var promise = when.promise(function (resolve, reject) {
-    var loginTemplate = require('../../templates/login.hbs'),
+    var loginTemplate = require('./templates/login.hbs'),
         $formEl;
     initState.$el.append(loginTemplate());
     $formEl = $('form.login');
