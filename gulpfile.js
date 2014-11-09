@@ -2,7 +2,19 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     browserify = require('gulp-browserify'),
     rename = require('gulp-rename'),
+    nodemon = require('gulp-nodemon'),
     sass = require('gulp-sass');
+
+gulp.task('build', ['client', 'sass']);
+
+gulp.task('watch', ['client-watch', 'sass-watch']);
+
+gulp.task('server', function () {
+  nodemon({
+    script: 'server/index',
+    ext: 'js json'
+  });
+});
 
 gulp.task('client', function () {
   gulp.src('client/js/main.js')
@@ -11,7 +23,7 @@ gulp.task('client', function () {
         extensions: ['.hbs']
       }))
       .pipe(rename('hearthclone.js'))
-      .pipe(gulp.dest('./build'));
+      .pipe(gulp.dest('./client/build'));
 });
 
 gulp.task('client-watch', function () {
@@ -28,3 +40,5 @@ gulp.task('sass', function () {
 gulp.task('sass-watch', function () {
   gulp.watch('client/**/*.scss', ['sass']);
 });
+
+gulp.task('default', ['build','server','watch']);
